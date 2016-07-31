@@ -68,3 +68,40 @@ function printNumber(num) {
     alert(num);
     //Função sem retorno
 }
+/* Declaração de variaveis de escopo */
+var car = "Ferrari";
+function getCarro(value) {
+    // 'var car' é uma variavel de escopo
+    var car = value;
+    return car;
+}
+console.log(getCarro("Camaro"));
+// Cuidado com o momento que você ter pegar o valor de uma variavel
+function testeA() {
+    var a = 1;
+    a = 2;
+    var b = testeB();
+    a = 3;
+    return b;
+    function testeB() {
+        return a;
+    }
+}
+function f(value) {
+    // let usando para variaveis locais
+    // var usado para variaveis globais
+    var a = 100;
+    if (value) {
+        var b = a + 1;
+    }
+    // não podemos usar o 'return b;' pois nesta parte o b não existe
+}
+/* Criando uma função no estilo Typescript */
+function g(condition, x) {
+    if (condition) {
+        var x_1 = 100;
+        return x_1;
+    }
+    return x;
+}
+console.log(g(false, 0));
