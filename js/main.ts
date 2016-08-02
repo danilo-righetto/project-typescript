@@ -232,3 +232,27 @@ function getColor(codecolor:string, title?:string):IColor{
 
 console.log(getColor("#000000"));
 console.log(getColor("#000000","black"));
+
+/* Interface para função Array */
+
+interface ITypeFunc{
+    // Podemos definir quais parametros
+    // ela vai receber e o que ela deve
+    // retornar
+    (a:number, b:number):boolean;
+}
+
+// Função implementando a interface
+var add:ITypeFunc;
+add = function(varA:number, varB:number):boolean{
+    return true;
+}
+
+//Criando uma interface de Array
+interface IArrayTypes{
+    [index:number]:string;
+}
+
+var a:IArrayTypes;
+a = ["teste"];
+console.log(a);
