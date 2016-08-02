@@ -189,3 +189,132 @@ console.log(corsa.name); // Ele já reconhece que trata-se
 console.log(corsa);
 console.log(MeuCarro2.list); // Acessando a lista estatica
 
+
+/* Interfaces para Tipos */
+
+interface IPessoa{
+    name:string;
+    age:number;
+}
+
+// Como utilizar a interface?
+
+function pessoa(value:IPessoa):void{
+    // value:IPessoa
+    console.log(value);
+}
+// Implementando uma interface
+pessoa({name:"Guilherme", age:19});
+
+// Interfaces para retorno de funções
+
+function pessoa2(name:string, age:number):IPessoa{
+    // Retornando a interface IPessoa 
+    return {name:name, age:age};
+}
+
+console.log(pessoa2("Pedro", 22));
+
+interface IColor{
+    title?:string;
+    /* Quando usamos o '?' estamos dizendo
+    que aquele campo ou função é optativo */
+    codecolor:string;    
+}
+
+function getColor(codecolor:string, title?:string):IColor{
+    if (title) {
+        return {codecolor:codecolor, title:title};
+    }
+    // Lembrando que 'title?:string' é opicional
+    return {codecolor:codecolor};
+}
+
+console.log(getColor("#000000"));
+console.log(getColor("#000000","black"));
+
+/* Interface para função Array */
+
+interface ITypeFunc{
+    // Podemos definir quais parametros
+    // ela vai receber e o que ela deve
+    // retornar
+    (a:number, b:number):boolean;
+}
+
+// Função implementando a interface
+var add:ITypeFunc;
+add = function(varA:number, varB:number):boolean{
+    return true;
+}
+
+//Criando uma interface de Array
+interface IArrayTypes{
+    [index:number]:string;
+}
+
+var a:IArrayTypes;
+a = ["teste"];
+console.log(a);
+
+// Interface para Classes
+
+interface ICountString{
+    valueTxt:string;
+    countTxt():number;
+}
+
+interface IPrintText{
+    print(value:string):void;
+}
+
+class Mytext implements ICountString, IPrintText{
+    constructor(public valueTxt:string){};
+    countTxt():number{
+        return this.valueTxt.length;
+    };
+    print(value:string):void{
+        console.log("Testando ... " + value);
+        
+    }
+}
+
+var t = new Mytext("meu texto ....");
+console.log(t.countTxt());
+
+
+/* Herança de Interface */
+
+interface ICarString{
+    name:string;
+    getCar():string;
+}
+
+interface ICarColorString{
+    color:string;
+    getColor():string;
+}
+
+interface ICarro extends ICarString, ICarColorString{
+    power:number;
+    getPower():number;
+}
+
+class Carro implements ICarro{
+    constructor(public name:string, public color:string, public power:number){};
+
+    getCar():string{
+        return this.name;
+    };
+
+    getColor():string{
+        return this.color;
+    }
+
+    getPower():number{
+        return this.power;
+    }
+}
+
+var Sedan = new Carro("Sedan", "Black", 90);
+console.log(Sedan.getCar());
